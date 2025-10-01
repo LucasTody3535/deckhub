@@ -28,6 +28,7 @@ function createHandUI() {
     container.appendChild(cardContainer);
   });
   appContainer.appendChild(container);
+  return container;
 }
 
 function createDeckUI() {
@@ -38,16 +39,19 @@ function createDeckUI() {
   container.classList.add("deck-ui");
   container.appendChild(text);
   appContainer.appendChild(container);
+  return container;
 }
 
 function prepareUI() {
+  let deckUI = null;
+  let handUI = null;
   if (!didAlreadyAnimationButton) {
     const animationClass = "load-deck-btn-when-game-started";
     loadDeckBtn.classList.add(animationClass);
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimationButton = true;
-      createDeckUI();
-      createHandUI();
+      deckUI = createDeckUI();
+      handUI = createHandUI();
     });
   }
 }
