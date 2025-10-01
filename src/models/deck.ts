@@ -34,4 +34,19 @@ export class Deck {
   public getCards() {
     return this.cards;
   }
+
+  /**
+   * Implementation of the Durstenfeld's version of the Fisher-Yates
+   * shuffle algorithm, obtained in https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
+   * It was consulted the book The Art of Programming 3rd Edition
+   * (Volume 2 - Seminumerical Algorithms) from Donald E. Knuth in the
+   * page 145 under "Algorithm P (Shuffling)"
+   */
+  public shuffle() {
+    let cards = this.cards;
+    for (let i = cards.length - 1; i >= 1; i--) {
+      let j: number = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+  }
 }
