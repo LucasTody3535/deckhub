@@ -79,17 +79,16 @@ body #app {
   position: absolute;
   display: block;
   bottom: 0px;
-  left: 0px;
+  left: 10px;
   width: 80vw;
   padding-left: 10px;
-  max-width: 80vw;
   padding-right: 10px;
   height: 350px;
   overflow-x: scroll;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* keeps left edge */
+  justify-content: flex-start; /* keeps top edge */
   column-gap: 10px;
   animation: display-gradually;
   animation-duration: 1s;
