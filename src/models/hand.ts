@@ -14,4 +14,8 @@ export class Hand {
   public removeCard(index: number) {
     this.cards = this.cards.filter((_, cardIndex) => index != cardIndex);
   }
+
+  public getCards() {
+    return this.cards;
+  }
 }
