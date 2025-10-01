@@ -54,4 +54,9 @@ export class Deck {
     this.shuffle();
     return this.cards.splice(0, this.initialDrawAfterFirstShuffle);
   }
+
+  public drawCard(): Card | null {
+    if (this.cards.length > 0) return this.cards.shift()!;
+    return null;
+  }
 }
