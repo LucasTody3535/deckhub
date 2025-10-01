@@ -66,10 +66,47 @@ body #app {
   font-size: 20pt;
 }
 
-.deck-ui:hover {
+.deck-ui:hover,
+.hand-ui .hand-ui-card:hover {
   cursor: pointer;
   transition: all ease-in-out 0.2s;
   box-shadow: 5px 5px 0px black;
   width: 205px;
   height: 305px;
+}
+
+.hand-ui {
+  position: absolute;
+  display: block;
+  bottom: 0px;
+  left: 0px;
+  width: 80vw;
+  padding-left: 10px;
+  max-width: 80vw;
+  padding-right: 10px;
+  height: 350px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  animation: display-gradually;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.hand-ui .hand-ui-card {
+  border: 1px solid black;
+  height: 300px;
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: 5px;
+}
+
+.hand-ui .hand-ui-card p {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }

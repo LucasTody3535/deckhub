@@ -8,10 +8,27 @@ const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
 const loadDeckBtn = document.getElementById("load-deck-btn") as HTMLElement;
 let deck = null;
-let hand = null;
+let hand: Hand | null = null;
 let data = null;
 
 let didAlreadyAnimationButton = false;
+
+function createHandUI() {
+  let container = document.createElement("div");
+  container.classList.add("hand-ui");
+  let title;
+  let cardContainer;
+  let cards = hand!.getCards();
+  cards.forEach((card) => {
+    cardContainer = document.createElement("div");
+    title = document.createElement("p");
+    cardContainer.classList.add("hand-ui-card");
+    title.innerText = card.getName();
+    cardContainer.append(title);
+    container.appendChild(cardContainer);
+  });
+  appContainer.appendChild(container);
+}
 
 function createDeckUI() {
   let container = document.createElement("div");
@@ -30,6 +47,7 @@ function prepareUI() {
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimationButton = true;
       createDeckUI();
+      createHandUI();
     });
   }
 }
