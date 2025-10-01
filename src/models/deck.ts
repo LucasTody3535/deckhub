@@ -52,8 +52,6 @@ export class Deck {
 
   public drawInitialQuantity(): Array<Card> {
     this.shuffle();
-    return this.cards.splice(
-      this.cards.length - this.initialDrawAfterFirstShuffle,
-    );
+    return this.cards.splice(0, this.initialDrawAfterFirstShuffle);
   }
 }
