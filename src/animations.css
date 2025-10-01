@@ -17,3 +17,12 @@
     height: 50px;
   }
 }
+
+@keyframes display-deck-gradually {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

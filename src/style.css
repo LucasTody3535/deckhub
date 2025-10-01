@@ -38,3 +38,32 @@ body * {
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
+
+.deck-ui {
+  position: absolute;
+  height: 300px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid black;
+  animation-name: display-deck-gradually;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  right: 35px;
+  top: 150px;
+}
+
+.deck-ui .deck-ui-text {
+  transform: rotate(90deg);
+  position: absolute;
+  top: 30px;
+  font-size: 20pt;
+}
+
+.deck-ui:hover {
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  box-shadow: 5px 5px 0px black;
+  width: 205px;
+  height: 305px;
+}
