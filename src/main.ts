@@ -7,6 +7,7 @@ const fileInput = document.getElementById("file-input") as HTMLElement;
 const loadDeckBtn = document.getElementById("load-deck-btn") as HTMLElement;
 let deck = null;
 let hand = null;
+let data = null;
 
 fileInput.addEventListener("change", (event: Event) => {
   const files = (event.target as HTMLInputElement).files!;
@@ -17,7 +18,7 @@ fileInput.addEventListener("change", (event: Event) => {
   if (file.type != "application/json") return;
 
   reader.onloadend = () => {
-    const data = JSON.parse(reader.result as string) as IDeckStructure;
+    data = JSON.parse(reader.result as string) as IDeckStructure;
     deck = new Deck(data);
     hand = new Hand(deck.drawInitialQuantity());
   };
