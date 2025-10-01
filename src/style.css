@@ -30,3 +30,11 @@ body * {
   width: 305px;
   height: 105px;
 }
+
+.load-deck-btn-when-game-started {
+  transition: none !important;
+  animation-name: move-btn-to-top-right;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
