@@ -18,7 +18,7 @@
   }
 }
 
-@keyframes display-deck-gradually {
+@keyframes display-gradually {
   from {
     opacity: 0;
   }
