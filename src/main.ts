@@ -1,10 +1,12 @@
 import type { IDeckStructure } from "./interfaces/IDeckStructure";
 import { Deck } from "./models/deck";
+import { Hand } from "./models/hand";
 import "./style.css";
 
 const fileInput = document.getElementById("file-input") as HTMLElement;
 const loadDeckBtn = document.getElementById("load-deck-btn") as HTMLElement;
 let deck = null;
+let hand = null;
 
 fileInput.addEventListener("change", (event: Event) => {
   const files = (event.target as HTMLInputElement).files!;
@@ -17,6 +19,7 @@ fileInput.addEventListener("change", (event: Event) => {
   reader.onloadend = () => {
     const data = JSON.parse(reader.result as string) as IDeckStructure;
     deck = new Deck(data);
+    hand = new Hand(deck.drawInitialQuantity());
   };
   reader.readAsText(file);
 });

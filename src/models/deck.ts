@@ -49,4 +49,11 @@ export class Deck {
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
   }
+
+  public drawInitialQuantity(): Array<Card> {
+    this.shuffle();
+    return this.cards.splice(
+      this.cards.length - this.initialDrawAfterFirstShuffle,
+    );
+  }
 }
