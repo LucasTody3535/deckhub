@@ -22,25 +22,32 @@ Esta foi uma idéia que eu tive enquanto desenvolvia um jogo de cartas.
         },
         {
             "name": "Card 2",
-            "description": "Description 1",
+            "description": "Description 2",
             "quantity": 3,
             "id": 2,
-            "effects": [
-                { "draw": 1, "shuffleBefore": true },
-                { "search": 1, "shuffleAfter": true },
-                { "search": 2, "shuffleBefore": true, "shuffleAfter": true }
-            ]
+            "effect": {
+                "type": 1
+            }
         },
+        {
+            "name": "Card 3",
+            "description": "Description 3",
+            "quantity": 3,
+            "id": 3,
+            "effect": {
+                "type": 2,
+                "target": 1
+            }
+        }
     ]
 }
 ```
 
-## Explanation of Optional Attributes
+## Explicação de Atributos Opcionais
 
-- **effects**: Uma coleção de efeitos que a carta possui, eles são aplicados na ordem em que são definidos
-    - **search(effect)**: Indica o id da carta sendo procurada
-    - **draw(effect)**: Indica o quanto deve ser sacado do baralho
-    - **shuffleAfter**: Indica se deve embaralhar depois de aplicar o efeito
-    - **shuffleBefore**: Indica se deve embaralhar antes de aplicar o efeito
+- **effect**: Um objeto com uma propriedade principal chamada type, usada para identificar o efeito que será aplicado.
 
-> Note que "search" e "draw" são nomes de efeitos, então eles não devem estar no mesmo objeto! Exemplo: { "draw": 1, "search": 1, "shuffleBefore": true, "shuffleAfter": true }
+### Lista de Efeitos
+
+- **1**: Saque uma carta do baralha e então o embaralhe. Este objeto contém apenas a propriedade type..
+- **2**: Retorna a primeira carta do baralho com o id especificado e então o embaralhe. O objeto precisa conter tanto a propriedade type quanto a propriedade target, sendo esta, contendo o id da carta que se deseja selecionar. 

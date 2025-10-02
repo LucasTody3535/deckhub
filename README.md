@@ -24,25 +24,32 @@ This was an idea I had while developing a card game.
         },
         {
             "name": "Card 2",
-            "description": "Description 1",
+            "description": "Description 2",
             "quantity": 3,
             "id": 2,
-            "effects": [
-                { "draw": 1, "shuffleBefore": true },
-                { "search": 1, "shuffleAfter": true },
-                { "search": 2, "shuffleBefore": true, "shuffleAfter": true }
-            ]
+            "effect": {
+                "type": 1
+            }
         },
+        {
+            "name": "Card 3",
+            "description": "Description 3",
+            "quantity": 3,
+            "id": 3,
+            "effect": {
+                "type": 2,
+                "target": 1
+            }
+        }
     ]
 }
 ```
 
 ## Explanation of Optional Attributes
 
-- **effects**: A collection of effects a card has. They are applied in the order they are defined
-    - **search(effect)**: Indicates the id of the card being searched
-    - **draw(effect)**: Indicates how much to draw from deck
-    - **shuffleAfter**: Indicates if the deck should be shuffled after the effect has been applied
-    - **shuffleBefore**: Indicates if the deck should be shuffled before applying the effect
+- **effect**: An object with a main property named type, which identifies the effect which will be applied.
 
-> Note that "search" and "draw" are effect names, so they cannot be in the same object! Example: { "draw": 1, "search": 1, "shuffleBefore": true, "shuffleAfter": true }
+### List of Current Effects
+
+- **1**: Draw a card from deck then shuffles it. This object is composed of only the type property.
+- **2**: Returns the first card from the deck with given id then shuffles deck. This object is composed of both type and target properties, with target being the card id that should be affected.
