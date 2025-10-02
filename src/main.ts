@@ -14,17 +14,27 @@ let data = null;
 
 let didAlreadyAnimationButton = false;
 
+let cardClickListener: () => void;
+
 function updateHandUI(handUIContainer: HTMLElement) {
   let cardTitle: HTMLElement;
   let cardContainer: HTMLElement;
   let cards = hand!.getCards();
   if (handUIContainer.childElementCount > 0) handUIContainer.replaceChildren();
-  cards.forEach((card) => {
+  cards.forEach((card, index) => {
     cardContainer = document.createElement("div");
     cardTitle = document.createElement("p");
     cardContainer.classList.add("hand-ui-card");
     cardTitle.innerText = card.getName();
     cardContainer.append(cardTitle);
+    cardClickListener = () => {
+      hand!.removeCard(index);
+      handUIContainer.childNodes.forEach((node) => {
+        node.removeEventListener("click", cardClickListener);
+      });
+      updateHandUI(handUIContainer);
+    };
+    cardContainer.addEventListener("click", cardClickListener);
     handUIContainer.appendChild(cardContainer);
   });
 }
