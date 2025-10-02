@@ -6,6 +6,7 @@ export class HandUI {
   private root: HTMLElement;
   private hand: Hand;
   private deck: Deck;
+  private cards!: Array<CardUI>;
 
   constructor(hand: Hand, deck: Deck, parent?: HTMLElement) {
     this.hand = hand;
@@ -17,12 +18,12 @@ export class HandUI {
   }
 
   public updateUI() {
-    let cardUI: CardUI;
-    let cards = this.hand.getCards();
+    let handCards = this.hand.getCards();
     let cardClickListener: () => void;
     if (this.root.hasChildNodes()) this.root.replaceChildren();
-    cards.forEach((card, index) => {
-      cardUI = new CardUI(this.root, card.getName());
+    this.cards = [];
+    handCards.forEach((card, index) => {
+      this.cards.push(new CardUI(this.root, card.getName()));
       cardClickListener = () => {
         const cardRemoved = this.hand.removeCard(index);
         cardRemoved.getEffects()?.forEach((effect) => {
@@ -38,7 +39,7 @@ export class HandUI {
         });
         this.updateUI();
       };
-      cardUI.onClick(cardClickListener);
+      this.cards[index].onClick(cardClickListener);
     });
   }
 }
