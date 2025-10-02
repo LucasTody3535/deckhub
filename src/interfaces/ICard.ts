@@ -5,5 +5,5 @@ export interface ICard {
   name: string;
   description: string;
   quantity: number;
-  effects?: Array<ICardEffect>;
+  effect?: ICardEffect;
 }

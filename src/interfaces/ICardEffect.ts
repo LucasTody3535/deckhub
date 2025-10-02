@@ -1,6 +1,4 @@
 export interface ICardEffect {
-  draw?: number;
-  search?: number;
-  shuffleBefore?: boolean;
-  shuffleAfter?: boolean;
+  type: number;
+  target?: number;
 }
