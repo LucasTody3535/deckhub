@@ -1,6 +1,7 @@
 export class CardUI {
   private root: HTMLElement;
   private text: HTMLParagraphElement;
+  private clickHandler!: () => void;
 
   constructor(parent: HTMLElement, text: string) {
     this.root = document.createElement("div");
@@ -12,6 +13,11 @@ export class CardUI {
   }
 
   public onClick(event: () => void) {
-    this.root.addEventListener("click", event);
+    this.clickHandler = event;
+    this.root.addEventListener("click", this.clickHandler);
+  }
+
+  public removeOnClickHandler() {
+    this.root.removeEventListener("click", this.clickHandler);
   }
 }
