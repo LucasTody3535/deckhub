@@ -12,7 +12,9 @@ export class Hand {
   }
 
   public removeCard(index: number) {
+    let cardRemoved = this.cards[index];
     this.cards = this.cards.filter((_, cardIndex) => index != cardIndex);
+    return cardRemoved;
   }
 
   public getCards() {
