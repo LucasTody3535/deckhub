@@ -4,6 +4,7 @@ import { Hand } from "./models/hand";
 import "./style.css";
 import "./animations.css";
 import type { Card } from "./models/card";
+import { DeckUI } from "./ui/deck_ui";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
@@ -57,29 +58,17 @@ function createHandUI() {
   return handUIContainer;
 }
 
-function createDeckUI() {
-  let container = document.createElement("div");
-  let text = document.createElement("p");
-  text.innerText = "Deck";
-  text.classList.add("deck-ui-text");
-  container.classList.add("deck-ui");
-  container.appendChild(text);
-  appContainer.appendChild(container);
-  return container;
-}
-
 function prepareUI() {
-  let deckUI = null;
   let handUI: HTMLElement;
-  let card: Card | null;
   if (!didAlreadyAnimationButton) {
     const animationClass = "load-deck-btn-when-game-started";
     loadDeckBtn.classList.add(animationClass);
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimationButton = true;
-      deckUI = createDeckUI();
+      const deckUI = new DeckUI(appContainer);
       handUI = createHandUI();
-      deckUI.addEventListener("click", (_) => {
+      deckUI.onClick(() => {
+        let card: Card | null;
         card = deck!.drawCard();
         if (card) {
           hand!.addOneCard(card);
