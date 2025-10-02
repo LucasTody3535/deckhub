@@ -5,6 +5,7 @@ import "./style.css";
 import "./animations.css";
 import type { Card } from "./models/card";
 import { DeckUI } from "./ui/deck_ui";
+import { HandUI } from "./ui/hand_ui";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
@@ -15,64 +16,20 @@ let data = null;
 
 let didAlreadyAnimationButton = false;
 
-let cardClickListener: () => void;
-
-function updateHandUI(handUIContainer: HTMLElement) {
-  let cardTitle: HTMLElement;
-  let cardContainer: HTMLElement;
-  let cards = hand!.getCards();
-  let cardRemoved: Card | null;
-  let cardDrawed: Card | null;
-  if (handUIContainer.childElementCount > 0) handUIContainer.replaceChildren();
-  cards.forEach((card, index) => {
-    cardContainer = document.createElement("div");
-    cardTitle = document.createElement("p");
-    cardContainer.classList.add("hand-ui-card");
-    cardTitle.innerText = card.getName();
-    cardContainer.append(cardTitle);
-    cardClickListener = () => {
-      cardRemoved = hand!.removeCard(index);
-      cardRemoved.getEffects()?.forEach((effect) => {
-        if (effect.draw) {
-          if (effect.shuffleBefore) deck!.shuffle();
-          cardDrawed = deck!.drawCard();
-          if (effect.shuffleAfter) deck!.shuffle();
-          if (cardDrawed) hand!.addOneCard(cardDrawed);
-        }
-      });
-      handUIContainer.childNodes.forEach((node) => {
-        node.removeEventListener("click", cardClickListener);
-      });
-      updateHandUI(handUIContainer);
-    };
-    cardContainer.addEventListener("click", cardClickListener);
-    handUIContainer.appendChild(cardContainer);
-  });
-}
-
-function createHandUI() {
-  let handUIContainer = document.createElement("div");
-  handUIContainer.classList.add("hand-ui");
-  updateHandUI(handUIContainer);
-  appContainer.appendChild(handUIContainer);
-  return handUIContainer;
-}
-
 function prepareUI() {
-  let handUI: HTMLElement;
   if (!didAlreadyAnimationButton) {
     const animationClass = "load-deck-btn-when-game-started";
     loadDeckBtn.classList.add(animationClass);
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimationButton = true;
       const deckUI = new DeckUI(appContainer);
-      handUI = createHandUI();
+      const handUI = new HandUI(hand!, deck!, appContainer);
       deckUI.onClick(() => {
         let card: Card | null;
         card = deck!.drawCard();
         if (card) {
           hand!.addOneCard(card);
-          updateHandUI(handUI);
+          handUI.updateUI();
         }
       });
     });
