@@ -20,14 +20,7 @@ export class HandUI {
   private addEventHandler(card: CardUI, index: number) {
     card.onClick(() => {
       const cardRemoved = this.hand.removeCard(index);
-      cardRemoved.getEffects()?.forEach((effect) => {
-        if (effect.draw) {
-          if (effect.shuffleBefore) this.deck.shuffle();
-          const cardDrawed = this.deck!.drawCard();
-          if (effect.shuffleAfter) this.deck!.shuffle();
-          if (cardDrawed) this.hand!.addOneCard(cardDrawed);
-        }
-      });
+      cardRemoved.getEffect()?.apply();
       this.cards.forEach((card) => card.removeOnClickHandler());
       this.updateUI();
     });

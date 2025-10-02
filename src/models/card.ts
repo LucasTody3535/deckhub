@@ -1,17 +1,17 @@
 import type { ICard } from "../interfaces/ICard";
-import type { ICardEffect } from "../interfaces/ICardEffect";
+import type { IEffect } from "../interfaces/IEffect";
 
 export class Card {
   private id: number;
   private name: string;
   private description: string;
-  private effects: Array<ICardEffect> | null;
+  private effect: IEffect | null;
 
   constructor(data: ICard) {
     this.id = data.id;
     this.name = data.name;
     this.description = data.description;
-    this.effects = data.effects || null;
+    this.effect = null;
   }
 
   public getId() {
@@ -26,7 +26,7 @@ export class Card {
     return this.description;
   }
 
-  public getEffects() {
-    return this.effects;
+  public getEffect() {
+    return this.effect;
   }
 }
