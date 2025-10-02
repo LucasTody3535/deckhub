@@ -20,6 +20,8 @@ function updateHandUI(handUIContainer: HTMLElement) {
   let cardTitle: HTMLElement;
   let cardContainer: HTMLElement;
   let cards = hand!.getCards();
+  let cardRemoved: Card | null;
+  let cardDrawed: Card | null;
   if (handUIContainer.childElementCount > 0) handUIContainer.replaceChildren();
   cards.forEach((card, index) => {
     cardContainer = document.createElement("div");
@@ -28,7 +30,15 @@ function updateHandUI(handUIContainer: HTMLElement) {
     cardTitle.innerText = card.getName();
     cardContainer.append(cardTitle);
     cardClickListener = () => {
-      hand!.removeCard(index);
+      cardRemoved = hand!.removeCard(index);
+      cardRemoved.getEffects()?.forEach((effect) => {
+        if (effect.draw) {
+          if (effect.shuffleBefore) deck!.shuffle();
+          cardDrawed = deck!.drawCard();
+          if (effect.shuffleAfter) deck!.shuffle();
+          if (cardDrawed) hand!.addOneCard(cardDrawed);
+        }
+      });
       handUIContainer.childNodes.forEach((node) => {
         node.removeEventListener("click", cardClickListener);
       });
