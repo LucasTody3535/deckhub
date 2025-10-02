@@ -1,5 +1,6 @@
 import type { Deck } from "../models/deck";
 import type { Hand } from "../models/hand";
+import { CardUI } from "./card_ui";
 
 export class HandUI {
   private root: HTMLElement;
@@ -16,17 +17,12 @@ export class HandUI {
   }
 
   public updateUI() {
-    let cardTitle: HTMLElement;
-    let cardContainer: HTMLElement;
+    let cardUI: CardUI;
     let cards = this.hand.getCards();
     let cardClickListener: () => void;
     if (this.root.hasChildNodes()) this.root.replaceChildren();
     cards.forEach((card, index) => {
-      cardContainer = document.createElement("div");
-      cardTitle = document.createElement("p");
-      cardContainer.classList.add("hand-ui-card");
-      cardTitle.innerText = card.getName();
-      cardContainer.append(cardTitle);
+      cardUI = new CardUI(this.root, card.getName());
       cardClickListener = () => {
         const cardRemoved = this.hand.removeCard(index);
         cardRemoved.getEffects()?.forEach((effect) => {
@@ -42,8 +38,7 @@ export class HandUI {
         });
         this.updateUI();
       };
-      cardContainer.addEventListener("click", cardClickListener);
-      this.root.appendChild(cardContainer);
+      cardUI.onClick(cardClickListener);
     });
   }
 }
