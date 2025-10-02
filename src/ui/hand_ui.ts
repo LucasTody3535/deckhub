@@ -34,9 +34,7 @@ export class HandUI {
             if (cardDrawed) this.hand!.addOneCard(cardDrawed);
           }
         });
-        this.root.childNodes.forEach((node) => {
-          node.removeEventListener("click", cardClickListener);
-        });
+        this.cards.forEach((card) => card.removeOnClickHandler());
         this.updateUI();
       };
       this.cards[index].onClick(cardClickListener);
