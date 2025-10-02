@@ -13,22 +13,27 @@ let data = null;
 
 let didAlreadyAnimationButton = false;
 
-function createHandUI() {
-  let container = document.createElement("div");
-  container.classList.add("hand-ui");
-  let title;
-  let cardContainer;
+function updateHandUI(handUIContainer: HTMLElement) {
+  let cardTitle: HTMLElement;
+  let cardContainer: HTMLElement;
   let cards = hand!.getCards();
+  if (handUIContainer.childElementCount > 0) handUIContainer.replaceChildren();
   cards.forEach((card) => {
     cardContainer = document.createElement("div");
-    title = document.createElement("p");
+    cardTitle = document.createElement("p");
     cardContainer.classList.add("hand-ui-card");
-    title.innerText = card.getName();
-    cardContainer.append(title);
-    container.appendChild(cardContainer);
+    cardTitle.innerText = card.getName();
+    cardContainer.append(cardTitle);
+    handUIContainer.appendChild(cardContainer);
   });
-  appContainer.appendChild(container);
-  return container;
+}
+
+function createHandUI() {
+  let handUIContainer = document.createElement("div");
+  handUIContainer.classList.add("hand-ui");
+  updateHandUI(handUIContainer);
+  appContainer.appendChild(handUIContainer);
+  return handUIContainer;
 }
 
 function createDeckUI() {
