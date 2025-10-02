@@ -17,27 +17,29 @@ export class HandUI {
     parent?.appendChild(this.root);
   }
 
+  private addEventHandler(card: CardUI, index: number) {
+    card.onClick(() => {
+      const cardRemoved = this.hand.removeCard(index);
+      cardRemoved.getEffects()?.forEach((effect) => {
+        if (effect.draw) {
+          if (effect.shuffleBefore) this.deck.shuffle();
+          const cardDrawed = this.deck!.drawCard();
+          if (effect.shuffleAfter) this.deck!.shuffle();
+          if (cardDrawed) this.hand!.addOneCard(cardDrawed);
+        }
+      });
+      this.cards.forEach((card) => card.removeOnClickHandler());
+      this.updateUI();
+    });
+  }
+
   public updateUI() {
     let handCards = this.hand.getCards();
-    let cardClickListener: () => void;
     if (this.root.hasChildNodes()) this.root.replaceChildren();
     this.cards = [];
     handCards.forEach((card, index) => {
       this.cards.push(new CardUI(this.root, card.getName()));
-      cardClickListener = () => {
-        const cardRemoved = this.hand.removeCard(index);
-        cardRemoved.getEffects()?.forEach((effect) => {
-          if (effect.draw) {
-            if (effect.shuffleBefore) this.deck.shuffle();
-            const cardDrawed = this.deck!.drawCard();
-            if (effect.shuffleAfter) this.deck!.shuffle();
-            if (cardDrawed) this.hand!.addOneCard(cardDrawed);
-          }
-        });
-        this.cards.forEach((card) => card.removeOnClickHandler());
-        this.updateUI();
-      };
-      this.cards[index].onClick(cardClickListener);
+      this.addEventHandler(this.cards[index], index);
     });
   }
 }
