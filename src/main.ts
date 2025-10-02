@@ -3,11 +3,12 @@ import { Deck } from "./models/deck";
 import { Hand } from "./models/hand";
 import "./style.css";
 import "./animations.css";
+import type { Card } from "./models/card";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
 const loadDeckBtn = document.getElementById("load-deck-btn") as HTMLElement;
-let deck = null;
+let deck: Deck | null = null;
 let hand: Hand | null = null;
 let data = null;
 
@@ -49,7 +50,8 @@ function createDeckUI() {
 
 function prepareUI() {
   let deckUI = null;
-  let handUI = null;
+  let handUI: HTMLElement;
+  let card: Card | null;
   if (!didAlreadyAnimationButton) {
     const animationClass = "load-deck-btn-when-game-started";
     loadDeckBtn.classList.add(animationClass);
@@ -57,6 +59,13 @@ function prepareUI() {
       didAlreadyAnimationButton = true;
       deckUI = createDeckUI();
       handUI = createHandUI();
+      deckUI.addEventListener("click", (_) => {
+        card = deck!.drawCard();
+        if (card) {
+          hand!.addOneCard(card);
+          updateHandUI(handUI);
+        }
+      });
     });
   }
 }
