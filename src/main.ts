@@ -1,5 +1,5 @@
 import type { IDeckStructure } from "./interfaces/IDeckStructure";
-import { Deck } from "./models/deck";
+import { Deck } from "./core/Deck";
 import { Hand } from "./models/hand";
 import "./style.css";
 import "./animations.css";

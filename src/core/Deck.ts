@@ -1,5 +1,5 @@
 import type { IDeckStructure } from "../interfaces/IDeckStructure";
-import { Card } from "../core/Card";
+import { Card } from "./Card";
 
 export class Deck {
   private name: string;

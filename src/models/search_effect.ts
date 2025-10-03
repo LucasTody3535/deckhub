@@ -1,5 +1,5 @@
 import type { IEffect } from "../interfaces/IEffect";
-import type { Deck } from "./deck";
+import type { Deck } from "../core/Deck";
 import type { Hand } from "./hand";
 
 export class SearchEffect implements IEffect {

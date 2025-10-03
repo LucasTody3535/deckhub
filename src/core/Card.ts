@@ -2,7 +2,7 @@ import { CardEffects } from "../enums/CardEffects";
 import type { ICard } from "../interfaces/ICard";
 import type { ICardEffect } from "../interfaces/ICardEffect";
 import type { IEffect } from "../interfaces/IEffect";
-import type { Deck } from "../models/deck";
+import type { Deck } from "./Deck";
 import { DrawEffect } from "../models/draw_effect";
 import type { Hand } from "../models/hand";
 import { SearchEffect } from "../models/search_effect";

@@ -1,4 +1,4 @@
-import type { Deck } from "../models/deck";
+import type { Deck } from "../core/Deck";
 import type { Hand } from "../models/hand";
 import { CardUI } from "./card_ui";
 
