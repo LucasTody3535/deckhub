@@ -5,7 +5,7 @@ import type { IEffect } from "../interfaces/IEffect";
 import type { Deck } from "./Deck";
 import { DrawEffect } from "../card-effects/DrawEffect";
 import type { Hand } from "./Hand";
-import { SearchEffect } from "../models/search_effect";
+import { SearchEffect } from "../card-effects/SearchEffect";
 
 export class Card {
   private id: number;
