@@ -1,6 +1,6 @@
 import type { Deck } from "../core/Deck";
 import type { Hand } from "../core/Hand";
-import { CardUI } from "./card_ui";
+import { CardUI } from "./CardUI";
 
 export class HandUI {
   private root: HTMLElement;
