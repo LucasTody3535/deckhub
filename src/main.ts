@@ -5,7 +5,7 @@ import "./style.css";
 import "./animations.css";
 import type { Card } from "./core/Card";
 import { DeckUI } from "./ui/deck_ui";
-import { HandUI } from "./ui/hand_ui";
+import { HandUI } from "./ui/HandUI";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
