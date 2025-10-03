@@ -14,14 +14,14 @@ let deck: Deck | null = null;
 let hand: Hand | null = null;
 let data = null;
 
-let didAlreadyAnimationButton = false;
+let didAlreadyAnimatedButton = false;
 
 function prepareUI() {
-  if (!didAlreadyAnimationButton) {
+  if (!didAlreadyAnimatedButton) {
     const animationClass = "load-deck-btn-when-game-started";
     loadDeckBtn.classList.add(animationClass);
     loadDeckBtn.addEventListener("animationend", () => {
-      didAlreadyAnimationButton = true;
+      didAlreadyAnimatedButton = true;
       const deckUI = new DeckUI(appContainer);
       const handUI = new HandUI(hand!, appContainer);
       deckUI.onClick(() => {
