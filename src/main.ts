@@ -4,7 +4,7 @@ import { Hand } from "./core/Hand";
 import "./style.css";
 import "./animations.css";
 import type { Card } from "./core/Card";
-import { DeckUI } from "./ui/deck_ui";
+import { DeckUI } from "./ui/DeckUI";
 import { HandUI } from "./ui/HandUI";
 
 const appContainer = document.getElementById("app") as HTMLElement;
