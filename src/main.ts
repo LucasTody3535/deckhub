@@ -47,8 +47,9 @@ fileInput.addEventListener("change", (event: Event) => {
   reader.onloadend = () => {
     data = JSON.parse(reader.result as string) as IDeckStructure;
     deck = new Deck(data);
-    hand = new Hand(deck.drawInitialQuantity());
+    hand = new Hand();
     deck.getCards().forEach((card) => card.setEffectBasedOnType(deck!, hand!));
+    hand.setInitialHand(deck.drawInitialQuantity());
     prepareUI();
   };
   reader.readAsText(file);

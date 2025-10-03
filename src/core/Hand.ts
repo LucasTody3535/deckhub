@@ -3,8 +3,8 @@ import type { Card } from "./Card";
 export class Hand {
   private cards!: Array<Card>;
 
-  constructor(cards: Array<Card>) {
-    this.cards = cards;
+  constructor() {
+    this.cards = [];
   }
 
   public addOneCard(card: Card) {
@@ -19,5 +19,9 @@ export class Hand {
 
   public getCards() {
     return this.cards;
+  }
+
+  public setInitialHand(cards: Array<Card>) {
+    this.cards = cards;
   }
 }
