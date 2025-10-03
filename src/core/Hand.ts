@@ -1,4 +1,4 @@
-import type { Card } from "../core/Card";
+import type { Card } from "./Card";
 
 export class Hand {
   private cards!: Array<Card>;

@@ -1,5 +1,5 @@
 import type { Deck } from "../core/Deck";
-import type { Hand } from "../models/hand";
+import type { Hand } from "../core/Hand";
 import { CardUI } from "./card_ui";
 
 export class HandUI {

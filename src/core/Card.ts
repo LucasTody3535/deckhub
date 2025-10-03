@@ -4,7 +4,7 @@ import type { ICardEffect } from "../interfaces/ICardEffect";
 import type { IEffect } from "../interfaces/IEffect";
 import type { Deck } from "./Deck";
 import { DrawEffect } from "../models/draw_effect";
-import type { Hand } from "../models/hand";
+import type { Hand } from "./Hand";
 import { SearchEffect } from "../models/search_effect";
 
 export class Card {

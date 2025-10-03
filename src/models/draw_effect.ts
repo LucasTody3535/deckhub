@@ -1,6 +1,6 @@
 import type { IEffect } from "../interfaces/IEffect";
 import type { Deck } from "../core/Deck";
-import type { Hand } from "./hand";
+import type { Hand } from "../core/Hand";
 
 export class DrawEffect implements IEffect {
   private deck: Deck;
