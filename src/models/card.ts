@@ -5,6 +5,7 @@ import type { IEffect } from "../interfaces/IEffect";
 import type { Deck } from "./deck";
 import { DrawEffect } from "./draw_effect";
 import type { Hand } from "./hand";
+import { SearchEffect } from "./search_effect";
 
 export class Card {
   private id: number;
@@ -27,6 +28,9 @@ export class Card {
     switch (this.effectMeta.type) {
       case CardEffects.DRAW_THEN_SHUFFLE:
         this.effect = new DrawEffect(deck, hand);
+        break;
+      case CardEffects.SEARCH_BY_ID_THEN_SHUFFLE:
+        this.effect = new SearchEffect(deck, hand, this.effectMeta.target!);
         break;
     }
   }
