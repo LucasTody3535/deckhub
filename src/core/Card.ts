@@ -2,10 +2,10 @@ import { CardEffects } from "../enums/CardEffects";
 import type { ICard } from "../interfaces/ICard";
 import type { ICardEffect } from "../interfaces/ICardEffect";
 import type { IEffect } from "../interfaces/IEffect";
-import type { Deck } from "./deck";
-import { DrawEffect } from "./draw_effect";
-import type { Hand } from "./hand";
-import { SearchEffect } from "./search_effect";
+import type { Deck } from "../models/deck";
+import { DrawEffect } from "../models/draw_effect";
+import type { Hand } from "../models/hand";
+import { SearchEffect } from "../models/search_effect";
 
 export class Card {
   private id: number;

@@ -3,7 +3,7 @@ import { Deck } from "./models/deck";
 import { Hand } from "./models/hand";
 import "./style.css";
 import "./animations.css";
-import type { Card } from "./models/card";
+import type { Card } from "./core/Card";
 import { DeckUI } from "./ui/deck_ui";
 import { HandUI } from "./ui/hand_ui";
 
