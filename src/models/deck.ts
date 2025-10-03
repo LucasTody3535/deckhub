@@ -59,4 +59,10 @@ export class Deck {
     if (this.cards.length > 0) return this.cards.shift()!;
     return null;
   }
+
+  public getCardById(id: number): Card | undefined {
+    if (this.cards.length > 0)
+      return this.cards.find((card) => card.getId() == id);
+    return undefined;
+  }
 }
