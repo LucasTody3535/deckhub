@@ -14,7 +14,6 @@ export class SearchEffect implements IEffect {
   }
 
   apply(): void {
-    console.log(this.cardId);
     const cardDrawed = this.deck!.getCardById(this.cardId);
     this.deck!.shuffle();
     if (cardDrawed) this.hand!.addOneCard(cardDrawed);
