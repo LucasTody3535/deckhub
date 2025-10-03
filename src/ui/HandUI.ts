@@ -1,16 +1,13 @@
-import type { Deck } from "../core/Deck";
 import type { Hand } from "../core/Hand";
 import { CardUI } from "./CardUI";
 
 export class HandUI {
   private root: HTMLElement;
   private hand: Hand;
-  private deck: Deck;
   private cards!: Array<CardUI>;
 
-  constructor(hand: Hand, deck: Deck, parent?: HTMLElement) {
+  constructor(hand: Hand, parent?: HTMLElement) {
     this.hand = hand;
-    this.deck = deck;
     this.root = document.createElement("div");
     this.root.classList.add("hand-ui");
     this.updateUI();

@@ -23,7 +23,7 @@ function prepareUI() {
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimationButton = true;
       const deckUI = new DeckUI(appContainer);
-      const handUI = new HandUI(hand!, deck!, appContainer);
+      const handUI = new HandUI(hand!, appContainer);
       deckUI.onClick(() => {
         let card: Card | null;
         card = deck!.drawCard();
