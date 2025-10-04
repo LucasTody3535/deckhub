@@ -21,4 +21,8 @@ export class DeckUI {
   public onClick(event: () => void) {
     this.root.addEventListener("click", event);
   }
+
+  public updateCardCount(quantity: number) {
+    this.cardCount.innerText = quantity.toString();
+  }
 }

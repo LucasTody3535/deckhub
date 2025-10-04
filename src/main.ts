@@ -32,6 +32,9 @@ function prepareUI() {
           handUI.updateUI();
         }
       });
+      deck!.addListenerForCardQuantityChange((quantity: number) => {
+        deckUI.updateCardCount(quantity);
+      });
     });
   }
 }
