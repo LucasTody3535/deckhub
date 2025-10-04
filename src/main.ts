@@ -15,6 +15,8 @@ let hand: Hand | null = null;
 let data = null;
 
 let didAlreadyAnimatedButton = false;
+let deckUI: DeckUI;
+let handUI: HandUI;
 
 function prepareUI() {
   if (!didAlreadyAnimatedButton) {
@@ -22,8 +24,8 @@ function prepareUI() {
     loadDeckBtn.classList.add(animationClass);
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimatedButton = true;
-      const deckUI = new DeckUI(deck!, appContainer);
-      const handUI = new HandUI(hand!, appContainer);
+      deckUI = new DeckUI(deck!, appContainer);
+      handUI = new HandUI(hand!, appContainer);
       deckUI.onClick(() => {
         let card: Card | null;
         card = deck!.drawCard();
@@ -36,7 +38,14 @@ function prepareUI() {
         deckUI.updateCardCount(quantity);
       });
     });
+  } else {
+    deckUI.updateCardCount(deck!.getCards().length);
+    handUI.setHand(hand!);
+    handUI.updateUI();
   }
+  deck!.addListenerForCardQuantityChange((quantity: number) => {
+    deckUI.updateCardCount(quantity);
+  });
 }
 
 fileInput.addEventListener("change", (event: Event) => {
