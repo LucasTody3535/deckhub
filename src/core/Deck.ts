@@ -1,17 +1,21 @@
 import type { IDeckStructure } from "../interfaces/IDeckStructure";
 import { Card } from "./Card";
 
+type CardQuatityListener = (quantity: number) => void;
+
 export class Deck {
   private name: string;
   private initialDrawAfterFirstShuffle: number;
   private drawQuantityInEachTurn: number;
   private cards: Array<Card>;
+  private cardQuantityListeners: Array<CardQuatityListener>;
 
   constructor(data: IDeckStructure) {
     this.name = data.name;
     this.initialDrawAfterFirstShuffle = data.initialDrawAfterFirstShuffle;
     this.drawQuantityInEachTurn = data.drawQuantityInEachTurn;
     this.cards = [];
+    this.cardQuantityListeners = [];
     data.cards.forEach((card) => {
       for (let i = 0; i < card.quantity; i++) {
         this.cards.push(new Card(card));
@@ -56,13 +60,36 @@ export class Deck {
   }
 
   public drawCard(): Card | null {
-    if (this.cards.length > 0) return this.cards.shift()!;
+    let card: Card | null;
+    if (this.cards.length > 0) {
+      card = this.cards.shift()!;
+      this.cardQuantityListeners.forEach((listener) =>
+        listener(this.cards.length),
+      );
+      return card;
+    }
     return null;
   }
 
   public getCardById(id: number): Card | undefined {
-    if (this.cards.length > 0)
-      return this.cards.find((card) => card.getId() == id);
+    let card: Card | undefined;
+    if (this.cards.length > 0) {
+      card = this.cards.find((card) => card.getId() == id);
+      this.cardQuantityListeners.forEach((listener) =>
+        listener(this.cards.length),
+      );
+      return card;
+    }
     return undefined;
+  }
+
+  public addListenerForCardQuantityChange(
+    listener: (quantity: number) => void,
+  ) {
+    this.cardQuantityListeners.push(listener);
+  }
+
+  public removeListeners() {
+    this.cardQuantityListeners.length = 0;
   }
 }
