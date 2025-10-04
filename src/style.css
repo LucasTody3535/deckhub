@@ -66,6 +66,13 @@ body #app {
   font-size: 20pt;
 }
 
+.deck-ui .deck-ui-card-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 18pt;
+}
+
 .deck-ui:hover,
 .hand-ui .hand-ui-card:hover {
   cursor: pointer;
