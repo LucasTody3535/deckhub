@@ -28,7 +28,7 @@ export class HandUI {
     if (this.root.hasChildNodes()) this.root.replaceChildren();
     this.cards = [];
     handCards.forEach((card, index) => {
-      this.cards.push(new CardUI(this.root, card.getName()));
+      this.cards.push(new CardUI(this.root, card));
       this.addEventHandler(this.cards[index], index);
     });
   }
