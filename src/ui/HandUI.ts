@@ -32,4 +32,8 @@ export class HandUI {
       this.addEventHandler(this.cards[index], index);
     });
   }
+
+  public setHand(hand: Hand) {
+    this.hand = hand;
+  }
 }
