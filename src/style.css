@@ -116,3 +116,24 @@ body #app {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
+.hand-ui-card-description {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  max-height: 200px;
+  width: 220px;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-top-left-radius: 5px;
+  display: block;
+  opacity: 0;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  padding: 10px 10px;
+}
+
+.display-description {
+  transition: all ease-in-out 0.2s;
+  opacity: 1;
+}
