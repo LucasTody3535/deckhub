@@ -24,8 +24,10 @@ function prepareUI() {
     loadDeckBtn.classList.add(animationClass);
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimatedButton = true;
-      deckUI = new DeckUI(deck!, appContainer);
+      deckUI = new DeckUI(appContainer);
       handUI = new HandUI(appContainer);
+      deckUI.updateDeckName(deck!.getName());
+      deckUI.updateCardCount(deck!.getCards().length);
       handUI.updateUI(hand!);
       deckUI.onClick(() => {
         let card: Card | null;
