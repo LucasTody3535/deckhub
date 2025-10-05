@@ -73,6 +73,23 @@ body #app {
   font-size: 18pt;
 }
 
+.deck-ui-deck-name {
+  position: absolute;
+  right: 32px;
+  border-radius: 5px;
+  border: 1px groove black;
+  top: 80px;
+  font-size: 15pt;
+  line-height: 50px;
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  animation-name: display-gradually;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
 .deck-ui:hover,
 .hand-ui .hand-ui-card:hover {
   cursor: pointer;

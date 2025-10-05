@@ -39,6 +39,7 @@ function prepareUI() {
       });
     });
   } else {
+    deckUI.updateDeckName(deck!.getName());
     deckUI.updateCardCount(deck!.getCards().length);
     handUI.setHand(hand!);
     handUI.updateUI();
