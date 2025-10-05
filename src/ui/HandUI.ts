@@ -4,27 +4,24 @@ import { CardUI } from "./CardUI";
 export class HandUI {
   private root: HTMLElement;
   private cardDescription: HTMLParagraphElement;
-  private hand: Hand;
   private cards!: Array<CardUI>;
 
-  constructor(hand: Hand, parent?: HTMLElement) {
-    this.hand = hand;
+  constructor(parent?: HTMLElement) {
     this.root = document.createElement("div");
     this.cardDescription = document.createElement("p");
     this.root.classList.add("hand-ui");
     this.cardDescription.classList.add("hand-ui-card-description");
-    this.updateUI();
     parent?.appendChild(this.cardDescription);
     parent?.appendChild(this.root);
   }
 
-  private addEventHandler(card: CardUI, index: number) {
+  private addEventHandler(card: CardUI, index: number, hand: Hand) {
     let cardDesc = this.cardDescription;
     card.onClick(() => {
-      const cardRemoved = this.hand.removeCard(index);
+      const cardRemoved = hand.removeCard(index);
       cardRemoved.getEffect()?.apply();
       this.cards.forEach((card) => card.removeOnClickHandler());
-      this.updateUI();
+      this.updateUI(hand);
     });
     card.onHover({
       onMouseEnter(card) {
@@ -40,17 +37,13 @@ export class HandUI {
     });
   }
 
-  public updateUI() {
-    let handCards = this.hand.getCards();
+  public updateUI(hand: Hand) {
+    let handCards = hand.getCards();
     if (this.root.hasChildNodes()) this.root.replaceChildren();
     this.cards = [];
     handCards.forEach((card, index) => {
       this.cards.push(new CardUI(this.root, card));
-      this.addEventHandler(this.cards[index], index);
+      this.addEventHandler(this.cards[index], index, hand);
     });
-  }
-
-  public setHand(hand: Hand) {
-    this.hand = hand;
   }
 }

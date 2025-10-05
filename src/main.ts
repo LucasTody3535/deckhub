@@ -25,24 +25,25 @@ function prepareUI() {
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimatedButton = true;
       deckUI = new DeckUI(deck!, appContainer);
-      handUI = new HandUI(hand!, appContainer);
+      handUI = new HandUI(appContainer);
+      handUI.updateUI(hand!);
       deckUI.onClick(() => {
         let card: Card | null;
         card = deck!.drawCard();
         if (card) {
           hand!.addOneCard(card);
-          handUI.updateUI();
+          handUI.updateUI(hand!);
         }
       });
       deck!.addListenerForCardQuantityChange((quantity: number) => {
         deckUI.updateCardCount(quantity);
       });
+      hand!.onCardRemoved((_) => handUI.updateUI(hand!));
     });
   } else {
     deckUI.updateDeckName(deck!.getName());
     deckUI.updateCardCount(deck!.getCards().length);
-    handUI.setHand(hand!);
-    handUI.updateUI();
+    handUI.updateUI(hand!);
   }
   deck!.addListenerForCardQuantityChange((quantity: number) => {
     deckUI.updateCardCount(quantity);
