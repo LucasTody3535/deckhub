@@ -73,8 +73,10 @@ export class Deck {
 
   public getCardById(id: number): Card | undefined {
     let card: Card | undefined;
+    let index: number;
     if (this.cards.length > 0) {
-      card = this.cards.find((card) => card.getId() == id);
+      index = this.cards.findIndex((card) => card.getId() == id);
+      card = this.cards.splice(index, 1)[0];
       this.cardQuantityListeners.forEach((listener) =>
         listener(this.cards.length),
       );
