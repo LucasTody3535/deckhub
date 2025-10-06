@@ -1,20 +1,8 @@
 @keyframes move-btn-to-top-right {
-  from {
-    /** 
-        Use specific values instead of "auto"
-        to allow smooth transition
-    **/
-    margin-left: calc(calc(100vw / 2) - 150px);
-    margin-top: calc(calc(100vh / 2) - 50px);
-  }
-  50% {
-    margin-top: 20px;
-    margin-left: calc(100vw - 330px);
-  }
   to {
-    margin-top: 20px;
-    margin-left: calc(100vw - 330px);
     height: 50px;
+    right: 34px;
+    top: 15px;
   }
 }
 
