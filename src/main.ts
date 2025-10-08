@@ -6,17 +6,21 @@ import "./animations.css";
 import type { Card } from "./core/Card";
 import { DeckUI } from "./ui/DeckUI";
 import { HandUI } from "./ui/HandUI";
+import { DiscardPile } from "./core/DiscardPile";
+import { DiscardPileUI } from "./ui/DiscardPileUI";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
 const loadDeckBtn = document.getElementById("load-deck-btn") as HTMLElement;
 let deck: Deck | null = null;
 let hand: Hand | null = null;
+let discardPile: DiscardPile | null = null;
 let data = null;
 
 let didAlreadyAnimatedButton = false;
 let deckUI: DeckUI;
 let handUI: HandUI;
+let discardPileUI: DiscardPileUI;
 
 function prepareUI() {
   if (!didAlreadyAnimatedButton) {
@@ -26,6 +30,7 @@ function prepareUI() {
       didAlreadyAnimatedButton = true;
       deckUI = new DeckUI(appContainer);
       handUI = new HandUI(appContainer);
+      discardPileUI = new DiscardPileUI(appContainer);
       deckUI.updateDeckName(deck!.getName());
       deckUI.updateCardCount(deck!.getCards().length);
       handUI.updateUI(hand!);
@@ -37,15 +42,25 @@ function prepareUI() {
           handUI.updateUI(hand!);
         }
       });
+      discardPileUI.onClick(() => {
+        discardPileUI.drawCardNamesIntoList(discardPile!.getCards());
+        loadDeckBtn.classList.add("to-behind");
+      });
       deck!.addListenerForCardQuantityChange((quantity: number) => {
         deckUI.updateCardCount(quantity);
       });
       hand!.onCardRemoved((_) => handUI.updateUI(hand!));
+      hand!.onCardRemoved((card) => discardPile!.addCard(card));
+      hand!.onCardRemoved((_) => discardPileUI.dismissCardList());
+      discardPile!.onCardAdded((quantity) =>
+        discardPileUI.updateCardCounter(quantity),
+      );
     });
   } else {
     deckUI.updateDeckName(deck!.getName());
     deckUI.updateCardCount(deck!.getCards().length);
     handUI.updateUI(hand!);
+    discardPileUI.updateCardCounter(0);
   }
   deck!.addListenerForCardQuantityChange((quantity: number) => {
     deckUI.updateCardCount(quantity);
@@ -64,6 +79,7 @@ fileInput.addEventListener("change", (event: Event) => {
     data = JSON.parse(reader.result as string) as IDeckStructure;
     deck = new Deck(data);
     hand = new Hand();
+    discardPile = new DiscardPile();
     deck.getCards().forEach((card) => card.setEffectBasedOnType(deck!, hand!));
     hand.setInitialHand(deck.drawInitialQuantity());
     prepareUI();

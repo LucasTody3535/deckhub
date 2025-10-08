@@ -153,3 +153,100 @@ body #app {
   transition: all ease-in-out 0.2s;
   opacity: 1;
 }
+
+#discard-pile-ui {
+  position: absolute;
+  display: inline-block;
+  font-size: 15pt;
+  top: 10px;
+  left: 10px;
+  width: 300px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+#discard-pile-ui:hover {
+  width: 305px;
+  height: 55px;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  box-shadow: 5px 5px 0px black;
+}
+
+#discard-pile-ui p {
+  height: 100%;
+  display: inline-block;
+  line-height: 50px;
+}
+
+#discard-pile-ui p:first-of-type {
+  width: 80%;
+  text-indent: 10px;
+}
+
+#discard-pile-ui p:last-of-type {
+  width: 20%;
+  text-align: center;
+}
+
+#discard-pile-card-list-ui {
+  z-index: -9;
+  position: absolute;
+  top: 0px;
+  left: -400px;
+  width: 400px;
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 10px;
+  opacity: 0;
+  display: grid;
+  grid-template-rows: 5% 95%;
+  transition: all ease-in-out 0.2s;
+}
+
+#discard-pile-card-list-ui #btn-container {
+  display: block;
+}
+
+#discard-pile-card-list-ui #cards-container {
+  display: block;
+  scrollbar-width: none;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+#discard-pile-card-list-ui #btn-container button {
+  width: 100px;
+  height: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: 10px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#discard-pile-card-list-ui #btn-container button:hover {
+  background-color: hsl(0, 70%, 50%);
+  cursor: pointer;
+}
+
+#discard-pile-card-list-ui p {
+  height: 35px;
+  line-height: 35px;
+  margin-bottom: 8px;
+  text-indent: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.show-discard-pile-list {
+  z-index: 9 !important;
+  background-color: hsl(0, 0%, 100%);
+  border-right: 1px solid black;
+  box-shadow: 5px 0px 0px black;
+  transition: all ease-in-out 0.2s;
+  opacity: 1 !important;
+  left: 0px !important;
+}
