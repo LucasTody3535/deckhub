@@ -3,14 +3,14 @@ import { CardUI } from "./CardUI";
 
 export class HandUI {
   private root: HTMLElement;
-  private cardDescription: HTMLParagraphElement;
+  private cardDescription: HTMLElement;
   private cards!: Array<CardUI>;
 
   constructor(parent?: HTMLElement) {
     this.root = document.createElement("div");
-    this.cardDescription = document.createElement("p");
+    this.cardDescription = document.createElement("div");
     this.root.classList.add("hand-ui");
-    this.cardDescription.classList.add("hand-ui-card-description");
+    this.cardDescription.id = "hand-ui-card-description";
     parent?.appendChild(this.cardDescription);
     parent?.appendChild(this.root);
   }
