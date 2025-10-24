@@ -10,6 +10,7 @@ export class CardUI {
   private text: HTMLParagraphElement;
   private card: Card;
   private clickHandler!: () => void;
+  private rightClickHandler!: (ev: Event) => void;
   private hoverHandler!: HoverEvent;
 
   constructor(parent: HTMLElement, card: Card) {
@@ -27,8 +28,17 @@ export class CardUI {
     this.root.addEventListener("click", this.clickHandler);
   }
 
-  public removeOnClickHandler() {
+  public onRightClick(event: (card: Card) => void) {
+    this.rightClickHandler = (ev: Event) => {
+      ev.preventDefault();
+      event(this.card);
+    };
+    this.root.addEventListener("contextmenu", this.rightClickHandler);
+  }
+
+  public removeClickEvents() {
     this.root.removeEventListener("click", this.clickHandler);
+    this.root.removeEventListener("contextmenu", this.rightClickHandler);
   }
 
   public onHover(hoverEv: HoverEvent) {

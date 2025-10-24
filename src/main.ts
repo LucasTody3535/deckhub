@@ -31,18 +31,18 @@ function prepareUI() {
     loadDeckBtn.addEventListener("animationend", () => {
       didAlreadyAnimatedButton = true;
       deckUI = new DeckUI(appContainer);
-      handUI = new HandUI(appContainer);
       cardDescUI = new CardDescriptionUI(appContainer);
+      handUI = new HandUI(cardDescUI, appContainer);
       discardPileUI = new DiscardPileUI(appContainer);
       deckUI.updateDeckName(deck!.getName());
       deckUI.updateCardCount(deck!.getCards().length);
-      handUI.updateUI(hand!, cardDescUI);
+      handUI.updateUI(hand!);
       deckUI.onClick(() => {
         let card: Card | null;
         card = deck!.drawCard();
         if (card) {
           hand!.addOneCard(card);
-          handUI.updateUI(hand!, cardDescUI);
+          handUI.updateUI(hand!);
         }
       });
       discardPileUI.onClick(() => {
@@ -52,7 +52,7 @@ function prepareUI() {
       deck!.addListenerForCardQuantityChange((quantity: number) => {
         deckUI.updateCardCount(quantity);
       });
-      hand!.onCardRemoved((_) => handUI.updateUI(hand!, cardDescUI));
+      hand!.onCardRemoved((_) => handUI.updateUI(hand!));
       hand!.onCardRemoved((card) => discardPile!.addCard(card));
       hand!.onCardRemoved((_) => discardPileUI.dismissCardList());
       discardPile!.onCardAdded((quantity) =>
@@ -62,7 +62,7 @@ function prepareUI() {
   } else {
     deckUI.updateDeckName(deck!.getName());
     deckUI.updateCardCount(deck!.getCards().length);
-    handUI.updateUI(hand!, cardDescUI);
+    handUI.updateUI(hand!);
     discardPileUI.updateCardCounter(0);
   }
   deck!.addListenerForCardQuantityChange((quantity: number) => {
