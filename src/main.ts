@@ -8,6 +8,7 @@ import { DeckUI } from "./ui/DeckUI";
 import { HandUI } from "./ui/HandUI";
 import { DiscardPile } from "./core/DiscardPile";
 import { DiscardPileUI } from "./ui/DiscardPileUI";
+import { CardDescriptionUI } from "./ui/CardDescriptionUI";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
@@ -20,6 +21,7 @@ let data = null;
 let didAlreadyAnimatedButton = false;
 let deckUI: DeckUI;
 let handUI: HandUI;
+let cardDescUI: CardDescriptionUI;
 let discardPileUI: DiscardPileUI;
 
 function prepareUI() {
@@ -30,16 +32,17 @@ function prepareUI() {
       didAlreadyAnimatedButton = true;
       deckUI = new DeckUI(appContainer);
       handUI = new HandUI(appContainer);
+      cardDescUI = new CardDescriptionUI(appContainer);
       discardPileUI = new DiscardPileUI(appContainer);
       deckUI.updateDeckName(deck!.getName());
       deckUI.updateCardCount(deck!.getCards().length);
-      handUI.updateUI(hand!);
+      handUI.updateUI(hand!, cardDescUI);
       deckUI.onClick(() => {
         let card: Card | null;
         card = deck!.drawCard();
         if (card) {
           hand!.addOneCard(card);
-          handUI.updateUI(hand!);
+          handUI.updateUI(hand!, cardDescUI);
         }
       });
       discardPileUI.onClick(() => {
@@ -49,7 +52,7 @@ function prepareUI() {
       deck!.addListenerForCardQuantityChange((quantity: number) => {
         deckUI.updateCardCount(quantity);
       });
-      hand!.onCardRemoved((_) => handUI.updateUI(hand!));
+      hand!.onCardRemoved((_) => handUI.updateUI(hand!, cardDescUI));
       hand!.onCardRemoved((card) => discardPile!.addCard(card));
       hand!.onCardRemoved((_) => discardPileUI.dismissCardList());
       discardPile!.onCardAdded((quantity) =>
@@ -59,7 +62,7 @@ function prepareUI() {
   } else {
     deckUI.updateDeckName(deck!.getName());
     deckUI.updateCardCount(deck!.getCards().length);
-    handUI.updateUI(hand!);
+    handUI.updateUI(hand!, cardDescUI);
     discardPileUI.updateCardCounter(0);
   }
   deck!.addListenerForCardQuantityChange((quantity: number) => {
