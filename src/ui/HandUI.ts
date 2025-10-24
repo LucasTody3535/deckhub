@@ -23,6 +23,10 @@ export class HandUI {
       this.updateUI(hand);
     });
     card.onRightClick((card) => {
+      if (cardDescUI.isVisible()) {
+        cardDescUI.hide();
+        return;
+      }
       if (card.getDescription().replaceAll(" ", "") != "") {
         cardDescUI.updateData(card.getName(), card.getDescription());
         cardDescUI.display();

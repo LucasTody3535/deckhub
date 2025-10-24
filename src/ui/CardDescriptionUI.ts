@@ -24,4 +24,8 @@ export class CardDescriptionUI {
   hide() {
     this.root.classList.remove("display-description");
   }
+
+  isVisible() {
+    return this.root.classList.contains("display-description");
+  }
 }
