@@ -38,7 +38,6 @@ export class HandUI {
           cardDescUI.updateData(card.getName(), card.getDescription());
         }
       },
-      onMouseLeave() {},
     });
   }
 

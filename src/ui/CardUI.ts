@@ -2,7 +2,6 @@ import type { Card } from "../core/Card";
 
 type HoverEvent = {
   onMouseEnter: (card: Card) => void;
-  onMouseLeave: () => void;
 };
 
 export class CardUI {
@@ -45,15 +44,11 @@ export class CardUI {
     this.root.addEventListener("mouseenter", () =>
       hoverEv.onMouseEnter(this.card),
     );
-    this.root.addEventListener("mouseleave", () => hoverEv.onMouseLeave());
   }
 
   public removeOnHover() {
     this.root.removeEventListener("mouseenter", () =>
       this.hoverHandler.onMouseEnter(this.card),
-    );
-    this.root.removeEventListener("mouseleave", () =>
-      this.hoverHandler.onMouseLeave(),
     );
   }
 }
