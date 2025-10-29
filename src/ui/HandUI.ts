@@ -32,6 +32,14 @@ export class HandUI {
         cardDescUI.display();
       }
     });
+    card.onHover({
+      onMouseEnter(card) {
+        if (cardDescUI.isVisible()) {
+          cardDescUI.updateData(card.getName(), card.getDescription());
+        }
+      },
+      onMouseLeave() {},
+    });
   }
 
   public updateUI(hand: Hand) {
