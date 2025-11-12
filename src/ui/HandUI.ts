@@ -7,11 +7,11 @@ export class HandUI {
   private cards!: Array<CardUI>;
   private cardDescUI: CardDescriptionUI;
 
-  constructor(cardDescUI: CardDescriptionUI, parent?: HTMLElement) {
+  constructor(cardDescUI: CardDescriptionUI, parent: HTMLElement) {
     this.root = document.createElement("div");
     this.cardDescUI = cardDescUI;
     this.root.classList.add("hand-ui");
-    parent?.appendChild(this.root);
+    parent.appendChild(this.root);
   }
 
   private addEventHandler(card: CardUI, index: number, hand: Hand) {
