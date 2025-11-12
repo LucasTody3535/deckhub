@@ -9,6 +9,7 @@ import { HandUI } from "./ui/HandUI";
 import { DiscardPile } from "./core/DiscardPile";
 import { DiscardPileUI } from "./ui/DiscardPileUI";
 import { CardDescriptionUI } from "./ui/CardDescriptionUI";
+import * as feather from "feather-icons";
 
 const appContainer = document.getElementById("app") as HTMLElement;
 const fileInput = document.getElementById("file-input") as HTMLElement;
@@ -25,6 +26,8 @@ let cardDescUI: CardDescriptionUI;
 let discardPileUI: DiscardPileUI;
 
 function prepareUI() {
+  let iconSetterId: number;
+
   if (!didAlreadyAnimatedButton) {
     const animationClass = "load-deck-btn-when-game-started";
     loadDeckBtn.classList.add(animationClass);
@@ -59,6 +62,11 @@ function prepareUI() {
         discardPileUI.updateCardCounter(quantity),
       );
     });
+    // Should be called only once
+    iconSetterId = setTimeout(() => {
+      feather.replace({ width: 28, height: 28 });
+      clearTimeout(iconSetterId);
+    }, 3000);
   } else {
     deckUI.updateDeckName(deck.getName());
     deckUI.updateCardCount(deck.getCards().length);

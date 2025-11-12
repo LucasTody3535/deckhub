@@ -163,6 +163,18 @@ body #app {
   font-size: 13pt;
 }
 
+#hand-ui-card-description :nth-child(3) {
+  position: absolute;
+  padding: 5px;
+  font-size: 13pt;
+  right: 5px;
+  top: 5px;
+}
+
+#hand-ui-card-description :nth-child(3):hover {
+  border-radius: 50px;
+}
+
 .display-description {
   transform: scaleX(1) !important;
   opacity: 1 !important;
@@ -243,7 +255,8 @@ body #app {
   border-radius: 5px;
 }
 
-#discard-pile-card-list-ui #btn-container button:hover {
+#discard-pile-card-list-ui #btn-container button:hover,
+#hand-ui-card-description :nth-child(3):hover {
   background-color: hsl(0, 70%, 50%);
   cursor: pointer;
 }
