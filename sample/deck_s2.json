@@ -1,0 +1,23 @@
+{
+    "name": "Hellish Creatures",
+    "initialDrawAfterFirstShuffle": 4,
+    "drawQuantityInEachTurn": 2,
+    "cards": [
+        {
+            "name": "Giga Terror",
+            "description": "A creature which uses its sharp claws to attack. When used, retrieve the first Dark Abbys that appears in your deck and  add to your hand",
+            "quantity": 4,
+            "id": 1,
+            "effect": {
+                "type": 2,
+                "target": 2
+            }
+        },
+        {
+            "name": "Dark Abbyss",
+            "description": "The source to the powers of all Hellish Creatures.",
+            "quantity": 3,
+            "id": 2
+        }
+    ]
+}

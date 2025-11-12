@@ -1,0 +1,22 @@
+{
+    "name": "Nature Creatures",
+    "initialDrawAfterFirstShuffle": 2,
+    "drawQuantityInEachTurn": 1,
+    "cards": [
+        {
+            "name": "Might Rhino",
+            "description": "A Rhinoceros which imposes his will fiercely. Has a sharp horn on its head which when provoked, turns in a big glowing horn.",
+            "quantity": 4,
+            "id": 1
+        },
+        {
+            "name": "Might Armadillo",
+            "description": "When used it lets you draw 1 card from the top of your deck.",
+            "quantity": 3,
+            "id": 2,
+            "effect": {
+                "type": 1
+            }
+        }
+    ]
+}
